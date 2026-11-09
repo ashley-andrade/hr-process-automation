@@ -1,8 +1,6 @@
-
 # RH Process Automation
 
-![HR Process Automation] (screenshots\book-cover.png)
-
+![Book-Cover] (screenshots\book-cover.png)
 Automação e centralização de processos operacionais de Recursos Humanos utilizando integração de sistemas, Make e Google Sheets.
 
 ## Sobre o projeto
@@ -21,10 +19,10 @@ A solução utiliza integração de dados, fluxos automatizados e funcionalidade
 
 ## Tecnologias utilizadas
 
-| Tecnologia | Aplicação |
-|---|---|
-| Solides | Fonte de dados dos colaboradores |
-| Make | Integração e automação de fluxos |
+| Tecnologia    | Aplicação                                         |
+| ------------- | ------------------------------------------------- |
+| Solides       | Fonte de dados dos colaboradores                  |
+| Make          | Integração e automação de fluxos                  |
 | Google Sheets | Centralização, organização e tratamento dos dados |
 
 ## Processos contemplados
