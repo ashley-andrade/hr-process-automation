@@ -29,8 +29,8 @@ A solução utiliza integração de dados, fluxos automatizados e funcionalidade
 ## Processos contemplados
 
 - Controle e fiscalização de vacinação.
-- Filtragem de dados para inclusão de cartões.
-- Geração e organização de guias de ASO.
+- Filtragem de dados para inclusão de cartões de benefícios.
+- Geração automática das guias de ASO e salva como PDF. Contemplendo condicionais como: exames específicos para determinada área, idade e setor.
 - Monitoramento de vencimentos de ASO.
 - Identificação de aniversariantes.
 - Consulta e filtragem de colaboradores por cargo.
@@ -53,8 +53,6 @@ rh-process-automation/
 ```
 
 ## Segurança e privacidade
-
-Este repositório não deve armazenar dados pessoais, informações sensíveis, credenciais ou documentos internos da organização.
 
 Exemplos utilizados na documentação serão fictícios e destinados exclusivamente à demonstração da solução.
 
