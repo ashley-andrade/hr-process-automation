@@ -1,0 +1,1304 @@
+{
+    "name": "Gerar Guias Médicas Automaticamente",
+    "flow": [
+        {
+            "id": 3,
+            "module": "google-sheets:filterRows",
+            "version": 2,
+            "parameters": {
+                "__IMTCONN__": 11957296
+            },
+            "mapper": {
+                "from": "drive",
+                "limit": "250",
+                "filter": [
+                    [
+                        {
+                            "a": "A",
+                            "b": "SIM",
+                            "o": "text:equal"
+                        }
+                    ]
+                ],
+                "orderBy": "__ROW_NUMBER__",
+                "sheetId": "GUIA",
+                "fieldType": "string",
+                "sortOrder": "asc",
+                "spreadsheetId": "1_RUYkVR68BafR_Gp7aS17torl2fD2dmDap-4EvAdzzU",
+                "tableFirstRow": "A1:Z1",
+                "includesHeaders": true,
+                "valueRenderOption": "FORMATTED_VALUE",
+                "dateTimeRenderOption": "FORMATTED_STRING"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 0,
+                    "y": 0
+                },
+                "setupValidation": {
+                    "result": {
+                        "valid": true,
+                        "fields": []
+                    },
+                    "version": 1,
+                    "configuration": "bd73808d4fc878e0"
+                },
+                "restore": {
+                    "expect": {
+                        "from": {
+                            "label": "Select from My Drive"
+                        },
+                        "orderBy": {
+                            "mode": "chose",
+                            "label": "Empty"
+                        },
+                        "sheetId": {
+                            "mode": "chose",
+                            "label": "GUIA"
+                        },
+                        "fieldType": {
+                            "mode": "chose",
+                            "label": "String"
+                        },
+                        "sortOrder": {
+                            "mode": "chose",
+                            "label": "Ascending"
+                        },
+                        "spreadsheetId": {
+                            "mode": "chose",
+                            "label": "Controle - Guia e Asos"
+                        },
+                        "tableFirstRow": {
+                            "label": "A-Z"
+                        },
+                        "includesHeaders": {
+                            "mode": "chose",
+                            "label": "Yes"
+                        },
+                        "valueRenderOption": {
+                            "mode": "chose",
+                            "label": "Formatted value"
+                        },
+                        "dateTimeRenderOption": {
+                            "mode": "chose",
+                            "label": "Formatted string"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "google"
+                            },
+                            "label": "SOLIM's Google connection (solimlaboratoriosrh@gmail.com)"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:google",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "from",
+                        "type": "select",
+                        "label": "Search Method",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "drive",
+                                "share"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "valueRenderOption",
+                        "type": "select",
+                        "label": "Value render option",
+                        "validate": {
+                            "enum": [
+                                "FORMATTED_VALUE",
+                                "UNFORMATTED_VALUE",
+                                "FORMULA"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "dateTimeRenderOption",
+                        "type": "select",
+                        "label": "Date and time render option",
+                        "validate": {
+                            "enum": [
+                                "SERIAL_NUMBER",
+                                "FORMATTED_STRING"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "type": "uinteger",
+                        "label": "Limit"
+                    },
+                    {
+                        "name": "spreadsheetId",
+                        "type": "select",
+                        "label": "Spreadsheet Name",
+                        "required": true
+                    },
+                    {
+                        "name": "sheetId",
+                        "type": "select",
+                        "label": "Sheet Name",
+                        "required": true
+                    },
+                    {
+                        "name": "includesHeaders",
+                        "type": "select",
+                        "label": "Table contains headers",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                true,
+                                false
+                            ]
+                        }
+                    },
+                    {
+                        "name": "tableFirstRow",
+                        "type": "select",
+                        "label": "Column range",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "A1:Z1",
+                                "A1:BZ1",
+                                "A1:CZ1",
+                                "A1:DZ1",
+                                "A1:MZ1",
+                                "A1:ZZ1",
+                                "A1:AZZ1",
+                                "A1:BZZ1",
+                                "A1:CZZ1",
+                                "A1:DZZ1",
+                                "A1:MZZ1",
+                                "A1:ZZZ1"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "filter",
+                        "type": "filter",
+                        "label": "Filter",
+                        "options": "rpc://google-sheets/2/rpcGetFilterKeys?includesHeaders=true"
+                    },
+                    {
+                        "name": "orderBy",
+                        "type": "select",
+                        "label": "Order by"
+                    },
+                    {
+                        "name": "sortOrder",
+                        "type": "select",
+                        "label": "Sort order",
+                        "validate": {
+                            "enum": [
+                                "asc",
+                                "desc"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "fieldType",
+                        "type": "select",
+                        "label": "Field Type",
+                        "validate": {
+                            "enum": [
+                                "string",
+                                "number",
+                                "date"
+                            ]
+                        }
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "__IMTLENGTH__",
+                        "type": "uinteger",
+                        "label": "Total number of bundles"
+                    },
+                    {
+                        "name": "__IMTINDEX__",
+                        "type": "uinteger",
+                        "label": "Bundle order position"
+                    },
+                    {
+                        "name": "__ROW_NUMBER__",
+                        "type": "number",
+                        "label": "Row number"
+                    },
+                    {
+                        "name": "__SPREADSHEET_ID__",
+                        "type": "text",
+                        "label": "Spreadsheet ID"
+                    },
+                    {
+                        "name": "__SHEET__",
+                        "type": "text",
+                        "label": "Sheet"
+                    },
+                    {
+                        "name": "0",
+                        "type": "text",
+                        "label": "Gerar Guia (A)"
+                    },
+                    {
+                        "name": "1",
+                        "type": "text",
+                        "label": "Aso (B)"
+                    },
+                    {
+                        "name": "2",
+                        "type": "text",
+                        "label": "Status (C)"
+                    },
+                    {
+                        "name": "3",
+                        "type": "text",
+                        "label": "Nome completo  (D)"
+                    },
+                    {
+                        "name": "4",
+                        "type": "text",
+                        "label": "Idade (E)"
+                    },
+                    {
+                        "name": "5",
+                        "type": "text",
+                        "label": "Cargo (F)"
+                    },
+                    {
+                        "name": "6",
+                        "type": "text",
+                        "label": "Data de Nascimento  (G)"
+                    },
+                    {
+                        "name": "7",
+                        "type": "text",
+                        "label": "Mês e Ano (H)"
+                    },
+                    {
+                        "name": "8",
+                        "type": "text",
+                        "label": "(I)"
+                    },
+                    {
+                        "name": "9",
+                        "type": "text",
+                        "label": "Manual de uso  (J)"
+                    },
+                    {
+                        "name": "10",
+                        "type": "text",
+                        "label": "(K)"
+                    },
+                    {
+                        "name": "11",
+                        "type": "text",
+                        "label": "(L)"
+                    },
+                    {
+                        "name": "12",
+                        "type": "text",
+                        "label": "(M)"
+                    },
+                    {
+                        "name": "13",
+                        "type": "text",
+                        "label": "(N)"
+                    },
+                    {
+                        "name": "14",
+                        "type": "text",
+                        "label": "(O)"
+                    },
+                    {
+                        "name": "15",
+                        "type": "text",
+                        "label": "(P)"
+                    },
+                    {
+                        "name": "16",
+                        "type": "text",
+                        "label": "(Q)"
+                    },
+                    {
+                        "name": "17",
+                        "type": "text",
+                        "label": "(R)"
+                    },
+                    {
+                        "name": "18",
+                        "type": "text",
+                        "label": "(S)"
+                    },
+                    {
+                        "name": "19",
+                        "type": "text",
+                        "label": "(T)"
+                    },
+                    {
+                        "name": "20",
+                        "type": "text",
+                        "label": "(U)"
+                    },
+                    {
+                        "name": "21",
+                        "type": "text",
+                        "label": "(V)"
+                    },
+                    {
+                        "name": "22",
+                        "type": "text",
+                        "label": "(W)"
+                    },
+                    {
+                        "name": "23",
+                        "type": "text",
+                        "label": "(X)"
+                    },
+                    {
+                        "name": "24",
+                        "type": "text",
+                        "label": "(Y)"
+                    },
+                    {
+                        "name": "25",
+                        "type": "text",
+                        "label": "(Z)"
+                    }
+                ],
+                "advanced": true
+            }
+        },
+        {
+            "id": 12,
+            "module": "builtin:BasicRouter",
+            "version": 1,
+            "mapper": null,
+            "metadata": {
+                "designer": {
+                    "x": 300,
+                    "y": 0
+                }
+            },
+            "routes": [
+                {
+                    "flow": [
+                        {
+                            "id": 7,
+                            "module": "google-docs:createADocumentFromTemplate",
+                            "version": 1,
+                            "parameters": {
+                                "__IMTCONN__": 11957296
+                            },
+                            "filter": {
+                                "name": "Condiçao para o exames simples",
+                                "conditions": [
+                                    [
+                                        {
+                                            "a": "{{3.`8`}}",
+                                            "b": "Administração",
+                                            "o": "text:equal"
+                                        }
+                                    ]
+                                ]
+                            },
+                            "mapper": {
+                                "from": "drive",
+                                "name": "{{3.`3`}} - EXAME SIMPLES - {{formatDate(now; \"MM/YYYY\")}}",
+                                "image": {},
+                                "select": "dropdown",
+                                "document": "/1kY52FKg6du682U2L3VsWt8CVM9zGNCIp/1S9WSXINfOq82sSXcmeCkEcFH1_6MaUfy/1Lgli6dOG9voRAjG1OmEMn-PYpeb6GKM7/1n6YZmlmi9sC6NN7JmGuDaclV3c8JcBukea342AtdBbU",
+                                "folderId": "/1kY52FKg6du682U2L3VsWt8CVM9zGNCIp/1S9WSXINfOq82sSXcmeCkEcFH1_6MaUfy/1l9CkeEQHwGJ4lmnIXn1Y6T4kfiswUmla",
+                                "requests": {
+                                    "nome": "{{3.`3`}}",
+                                    "cargo": "{{3.`5`}}",
+                                    "idade": "{{3.`4`}}"
+                                },
+                                "destination": "drive"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 609,
+                                    "y": -435,
+                                    "name": "Exames Simples"
+                                },
+                                "setupValidation": {
+                                    "result": {
+                                        "valid": true,
+                                        "fields": []
+                                    },
+                                    "version": 1,
+                                    "configuration": "56758d60ffc85753"
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "from": {
+                                            "label": "My Drive"
+                                        },
+                                        "select": {
+                                            "label": "By Dropdown"
+                                        },
+                                        "document": {
+                                            "path": [
+                                                "02 - RECURSOS HUMANOS ",
+                                                "Controle de Guia e Asos",
+                                                "Docs",
+                                                "Teste Exame Simples.doc"
+                                            ]
+                                        },
+                                        "folderId": {
+                                            "mode": "chose",
+                                            "path": [
+                                                "02 - RECURSOS HUMANOS ",
+                                                "Controle de Guia e Asos",
+                                                "Exame Simples"
+                                            ]
+                                        },
+                                        "destination": {
+                                            "label": "My Drive"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "google"
+                                            },
+                                            "label": "SOLIM's Google connection (solimlaboratoriosrh@gmail.com)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:google",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "select",
+                                        "type": "select",
+                                        "label": "Create a Document from a Template",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "map",
+                                                "dropdown"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "name",
+                                        "type": "text",
+                                        "label": "Title",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "destination",
+                                        "type": "select",
+                                        "label": "New Drive Location",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "drive",
+                                                "share",
+                                                "team"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "from",
+                                        "type": "select",
+                                        "label": "Choose a Drive",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "drive",
+                                                "share",
+                                                "team"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "document",
+                                        "type": "file",
+                                        "label": "Document ID",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "requests",
+                                        "spec": [
+                                            {
+                                                "name": "nome",
+                                                "type": "any"
+                                            },
+                                            {
+                                                "name": "idade",
+                                                "type": "any"
+                                            },
+                                            {
+                                                "name": "cargo",
+                                                "type": "any"
+                                            }
+                                        ],
+                                        "type": "collection",
+                                        "label": "Values"
+                                    },
+                                    {
+                                        "name": "image",
+                                        "spec": [
+                                            {
+                                                "name": "kix.ik1oxe2fyny8-t.0",
+                                                "type": "url",
+                                                "label": "Tab (Tab 1) - Body: Image No. 1",
+                                                "metadata": {
+                                                    "tabId": "t.0"
+                                                }
+                                            },
+                                            {
+                                                "name": "kix.gnaigefj3gbg-t.0",
+                                                "type": "url",
+                                                "label": "Tab (Tab 1) - Body: Image No. 2",
+                                                "metadata": {
+                                                    "tabId": "t.0"
+                                                }
+                                            },
+                                            {
+                                                "name": "kix.8s86rczgcmjw-t.0",
+                                                "type": "url",
+                                                "label": "Tab (Tab 1) - Body: Image No. 3",
+                                                "metadata": {
+                                                    "tabId": "t.0"
+                                                }
+                                            },
+                                            {
+                                                "name": "kix.jdk53wjxehuq-t.0",
+                                                "type": "url",
+                                                "label": "Tab (Tab 1) - Body: Image No. 4",
+                                                "metadata": {
+                                                    "tabId": "t.0"
+                                                }
+                                            },
+                                            {
+                                                "name": "kix.yhoj6u9xmozz-t.0",
+                                                "type": "url",
+                                                "label": "Tab (Tab 1) - Body: Image No. 5",
+                                                "metadata": {
+                                                    "tabId": "t.0"
+                                                }
+                                            },
+                                            {
+                                                "name": "kix.9uoafc3jjs6t-t.0",
+                                                "type": "url",
+                                                "label": "Tab (Tab 1) - Body: Image No. 6",
+                                                "metadata": {
+                                                    "tabId": "t.0"
+                                                }
+                                            },
+                                            {
+                                                "name": "kix.tp4qhax92p9l-t.0",
+                                                "type": "url",
+                                                "label": "Tab (Tab 1) - Body: Image No. 7",
+                                                "metadata": {
+                                                    "tabId": "t.0"
+                                                }
+                                            },
+                                            {
+                                                "name": "kix.tioyi34kzd4f-t.0",
+                                                "type": "url",
+                                                "label": "Tab (Tab 1) - Body: Image No. 8",
+                                                "metadata": {
+                                                    "tabId": "t.0"
+                                                }
+                                            },
+                                            {
+                                                "name": "kix.xtnzqatigkf-t.0",
+                                                "type": "url",
+                                                "label": "Tab (Tab 1) - Body: Image No. 9",
+                                                "metadata": {
+                                                    "tabId": "t.0"
+                                                }
+                                            },
+                                            {
+                                                "name": "kix.fl032gna41h1-t.0",
+                                                "type": "url",
+                                                "label": "Tab (Tab 1) - Body: Image No. 10",
+                                                "metadata": {
+                                                    "tabId": "t.0"
+                                                }
+                                            },
+                                            {
+                                                "name": "kix.ybhsrr61vnur-t.0",
+                                                "type": "url",
+                                                "label": "Tab (Tab 1) - Body: Image No. 11",
+                                                "metadata": {
+                                                    "tabId": "t.0"
+                                                }
+                                            },
+                                            {
+                                                "name": "kix.nucphdjwuc47-t.0",
+                                                "type": "url",
+                                                "label": "Tab (Tab 1) - Body: Image No. 12",
+                                                "metadata": {
+                                                    "tabId": "t.0"
+                                                }
+                                            }
+                                        ],
+                                        "type": "collection",
+                                        "label": "Image URLs"
+                                    },
+                                    {
+                                        "name": "folderId",
+                                        "type": "folder",
+                                        "label": "New Document's Location",
+                                        "required": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "flow": [
+                        {
+                            "id": 9,
+                            "module": "google-docs:createADocumentFromTemplate",
+                            "version": 1,
+                            "parameters": {
+                                "__IMTCONN__": 11957296
+                            },
+                            "filter": {
+                                "name": "Condição para raio x e ecg",
+                                "conditions": [
+                                    [
+                                        {
+                                            "a": "{{3.`4`}}",
+                                            "b": "40",
+                                            "o": "number:greaterorequal"
+                                        }
+                                    ]
+                                ]
+                            },
+                            "mapper": {
+                                "from": "drive",
+                                "name": "{{3.`3`}} - RX e E.C.G - {{formatDate(now; \"MM/YYYY\")}}",
+                                "image": {},
+                                "select": "dropdown",
+                                "document": "/1kY52FKg6du682U2L3VsWt8CVM9zGNCIp/1S9WSXINfOq82sSXcmeCkEcFH1_6MaUfy/1Lgli6dOG9voRAjG1OmEMn-PYpeb6GKM7/1lidXtvSAND0y0Xu77qVnwdH9PNuuQdRY-3NOLsnRg6U",
+                                "folderId": "/1kY52FKg6du682U2L3VsWt8CVM9zGNCIp/1S9WSXINfOq82sSXcmeCkEcFH1_6MaUfy/1xiC0JD-al8afeTJVDfYD-KDaoXOCRPzV",
+                                "requests": {
+                                    "nome": "{{3.`3`}}",
+                                    "cargo": "{{3.`5`}}",
+                                    "idade": "{{3.`4`}}"
+                                },
+                                "destination": "drive"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 639,
+                                    "y": -160,
+                                    "name": "E.C.G e RX"
+                                },
+                                "setupValidation": {
+                                    "result": {
+                                        "valid": true,
+                                        "fields": []
+                                    },
+                                    "version": 1,
+                                    "configuration": "a6e7edebd05b86ec"
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "from": {
+                                            "label": "My Drive"
+                                        },
+                                        "select": {
+                                            "label": "By Dropdown"
+                                        },
+                                        "document": {
+                                            "path": [
+                                                "02 - RECURSOS HUMANOS ",
+                                                "Controle de Guia e Asos",
+                                                "Docs",
+                                                "Rx"
+                                            ]
+                                        },
+                                        "folderId": {
+                                            "mode": "chose",
+                                            "path": [
+                                                "02 - RECURSOS HUMANOS ",
+                                                "Controle de Guia e Asos",
+                                                "RAIO X e ECG"
+                                            ]
+                                        },
+                                        "destination": {
+                                            "label": "My Drive"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "google"
+                                            },
+                                            "label": "SOLIM's Google connection (solimlaboratoriosrh@gmail.com)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:google",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "select",
+                                        "type": "select",
+                                        "label": "Create a Document from a Template",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "map",
+                                                "dropdown"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "name",
+                                        "type": "text",
+                                        "label": "Title",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "destination",
+                                        "type": "select",
+                                        "label": "New Drive Location",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "drive",
+                                                "share",
+                                                "team"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "from",
+                                        "type": "select",
+                                        "label": "Choose a Drive",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "drive",
+                                                "share",
+                                                "team"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "document",
+                                        "type": "file",
+                                        "label": "Document ID",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "requests",
+                                        "spec": [
+                                            {
+                                                "name": "nome",
+                                                "type": "any"
+                                            },
+                                            {
+                                                "name": "idade",
+                                                "type": "any"
+                                            },
+                                            {
+                                                "name": "cargo",
+                                                "type": "any"
+                                            }
+                                        ],
+                                        "type": "collection",
+                                        "label": "Values"
+                                    },
+                                    {
+                                        "name": "image",
+                                        "spec": [
+                                            {
+                                                "name": "i.1-t.0",
+                                                "type": "url",
+                                                "label": "Tab (Tab 1) - Body: Image No. 1",
+                                                "metadata": {
+                                                    "tabId": "t.0"
+                                                }
+                                            },
+                                            {
+                                                "name": "kix.nv0n39n32on2-t.0",
+                                                "type": "url",
+                                                "label": "Tab (Tab 1) - Body: Image No. 2",
+                                                "metadata": {
+                                                    "tabId": "t.0"
+                                                }
+                                            }
+                                        ],
+                                        "type": "collection",
+                                        "label": "Image URLs"
+                                    },
+                                    {
+                                        "name": "folderId",
+                                        "type": "folder",
+                                        "label": "New Document's Location",
+                                        "required": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "flow": [
+                        {
+                            "id": 10,
+                            "module": "google-docs:createADocumentFromTemplate",
+                            "version": 1,
+                            "parameters": {
+                                "__IMTCONN__": 11957296
+                            },
+                            "filter": {
+                                "name": "Condição para o exame complexo",
+                                "conditions": [
+                                    [
+                                        {
+                                            "a": "{{3.`8`}}",
+                                            "b": "Saúde",
+                                            "o": "text:contain:ci"
+                                        }
+                                    ]
+                                ]
+                            },
+                            "mapper": {
+                                "from": "drive",
+                                "name": "{{3.`3`}} - Exame Complexo - {{formatDate(now; \"MM/YYYY\")}}",
+                                "image": {},
+                                "select": "dropdown",
+                                "document": "/1kY52FKg6du682U2L3VsWt8CVM9zGNCIp/1S9WSXINfOq82sSXcmeCkEcFH1_6MaUfy/1Lgli6dOG9voRAjG1OmEMn-PYpeb6GKM7/1lidXtvSAND0y0Xu77qVnwdH9PNuuQdRY-3NOLsnRg6U",
+                                "folderId": "/1kY52FKg6du682U2L3VsWt8CVM9zGNCIp/1S9WSXINfOq82sSXcmeCkEcFH1_6MaUfy/1N3Fxn1PAD-VStaeU5oPsWysamHBuu5tT",
+                                "requests": {
+                                    "nome": "{{3.`3`}}",
+                                    "cargo": "{{3.`5`}}",
+                                    "idade": "{{3.`4`}}"
+                                },
+                                "destination": "drive"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 644,
+                                    "y": 84,
+                                    "name": "Exame complexo"
+                                },
+                                "setupValidation": {
+                                    "result": {
+                                        "valid": true,
+                                        "fields": []
+                                    },
+                                    "version": 1,
+                                    "configuration": "dec14595afbd5a87"
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "from": {
+                                            "label": "My Drive"
+                                        },
+                                        "select": {
+                                            "label": "By Dropdown"
+                                        },
+                                        "document": {
+                                            "path": [
+                                                "02 - RECURSOS HUMANOS ",
+                                                "Controle de Guia e Asos",
+                                                "Docs",
+                                                "Rx"
+                                            ]
+                                        },
+                                        "folderId": {
+                                            "mode": "chose",
+                                            "path": [
+                                                "02 - RECURSOS HUMANOS ",
+                                                "Controle de Guia e Asos",
+                                                "Exame Complexo"
+                                            ]
+                                        },
+                                        "destination": {
+                                            "label": "My Drive"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "google"
+                                            },
+                                            "label": "SOLIM's Google connection (solimlaboratoriosrh@gmail.com)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:google",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "select",
+                                        "type": "select",
+                                        "label": "Create a Document from a Template",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "map",
+                                                "dropdown"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "name",
+                                        "type": "text",
+                                        "label": "Title",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "destination",
+                                        "type": "select",
+                                        "label": "New Drive Location",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "drive",
+                                                "share",
+                                                "team"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "from",
+                                        "type": "select",
+                                        "label": "Choose a Drive",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "drive",
+                                                "share",
+                                                "team"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "document",
+                                        "type": "file",
+                                        "label": "Document ID",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "requests",
+                                        "spec": [
+                                            {
+                                                "name": "nome",
+                                                "type": "any"
+                                            },
+                                            {
+                                                "name": "idade",
+                                                "type": "any"
+                                            },
+                                            {
+                                                "name": "cargo",
+                                                "type": "any"
+                                            }
+                                        ],
+                                        "type": "collection",
+                                        "label": "Values"
+                                    },
+                                    {
+                                        "name": "image",
+                                        "spec": [
+                                            {
+                                                "name": "i.1-t.0",
+                                                "type": "url",
+                                                "label": "Tab (Tab 1) - Body: Image No. 1",
+                                                "metadata": {
+                                                    "tabId": "t.0"
+                                                }
+                                            },
+                                            {
+                                                "name": "kix.nv0n39n32on2-t.0",
+                                                "type": "url",
+                                                "label": "Tab (Tab 1) - Body: Image No. 2",
+                                                "metadata": {
+                                                    "tabId": "t.0"
+                                                }
+                                            }
+                                        ],
+                                        "type": "collection",
+                                        "label": "Image URLs"
+                                    },
+                                    {
+                                        "name": "folderId",
+                                        "type": "folder",
+                                        "label": "New Document's Location",
+                                        "required": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "flow": [
+                        {
+                            "id": 11,
+                            "module": "google-docs:createADocumentFromTemplate",
+                            "version": 1,
+                            "parameters": {
+                                "__IMTCONN__": 11957296
+                            },
+                            "filter": {
+                                "name": "Condição para o raio x",
+                                "conditions": [
+                                    [
+                                        {
+                                            "a": "{{3.`8`}}",
+                                            "b": "Saúde",
+                                            "o": "text:contain:ci"
+                                        },
+                                        {
+                                            "a": "{{3.`4`}}",
+                                            "b": "40",
+                                            "o": "number:less"
+                                        }
+                                    ]
+                                ]
+                            },
+                            "mapper": {
+                                "from": "drive",
+                                "name": "{{3.`3`}} - RX - {{formatDate(now; \"MM/YYYY\")}}",
+                                "image": {},
+                                "select": "dropdown",
+                                "document": "/1kY52FKg6du682U2L3VsWt8CVM9zGNCIp/1S9WSXINfOq82sSXcmeCkEcFH1_6MaUfy/1Lgli6dOG9voRAjG1OmEMn-PYpeb6GKM7/1lidXtvSAND0y0Xu77qVnwdH9PNuuQdRY-3NOLsnRg6U",
+                                "folderId": "/1kY52FKg6du682U2L3VsWt8CVM9zGNCIp/1S9WSXINfOq82sSXcmeCkEcFH1_6MaUfy/1cpSGWUvNNkpVlU1k2MYMsD-MtTbGwlH1",
+                                "requests": {
+                                    "nome": "{{3.`3`}}",
+                                    "cargo": "{{3.`5`}}",
+                                    "idade": "{{3.`4`}}"
+                                },
+                                "destination": "drive"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 644,
+                                    "y": 354,
+                                    "name": "RX"
+                                },
+                                "setupValidation": {
+                                    "result": {
+                                        "valid": true,
+                                        "fields": []
+                                    },
+                                    "version": 1,
+                                    "configuration": "2ce7aaaa23a199bb"
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "from": {
+                                            "label": "My Drive"
+                                        },
+                                        "select": {
+                                            "label": "By Dropdown"
+                                        },
+                                        "document": {
+                                            "path": [
+                                                "02 - RECURSOS HUMANOS ",
+                                                "Controle de Guia e Asos",
+                                                "Docs",
+                                                "Rx"
+                                            ]
+                                        },
+                                        "folderId": {
+                                            "mode": "chose",
+                                            "path": [
+                                                "02 - RECURSOS HUMANOS ",
+                                                "Controle de Guia e Asos",
+                                                "RAIO X"
+                                            ]
+                                        },
+                                        "destination": {
+                                            "label": "My Drive"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "google"
+                                            },
+                                            "label": "SOLIM's Google connection (solimlaboratoriosrh@gmail.com)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:google",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "select",
+                                        "type": "select",
+                                        "label": "Create a Document from a Template",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "map",
+                                                "dropdown"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "name",
+                                        "type": "text",
+                                        "label": "Title",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "destination",
+                                        "type": "select",
+                                        "label": "New Drive Location",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "drive",
+                                                "share",
+                                                "team"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "from",
+                                        "type": "select",
+                                        "label": "Choose a Drive",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "drive",
+                                                "share",
+                                                "team"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "document",
+                                        "type": "file",
+                                        "label": "Document ID",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "requests",
+                                        "spec": [
+                                            {
+                                                "name": "nome",
+                                                "type": "any"
+                                            },
+                                            {
+                                                "name": "idade",
+                                                "type": "any"
+                                            },
+                                            {
+                                                "name": "cargo",
+                                                "type": "any"
+                                            }
+                                        ],
+                                        "type": "collection",
+                                        "label": "Values"
+                                    },
+                                    {
+                                        "name": "image",
+                                        "spec": [
+                                            {
+                                                "name": "i.1-t.0",
+                                                "type": "url",
+                                                "label": "Tab (Tab 1) - Body: Image No. 1",
+                                                "metadata": {
+                                                    "tabId": "t.0"
+                                                }
+                                            },
+                                            {
+                                                "name": "kix.nv0n39n32on2-t.0",
+                                                "type": "url",
+                                                "label": "Tab (Tab 1) - Body: Image No. 2",
+                                                "metadata": {
+                                                    "tabId": "t.0"
+                                                }
+                                            }
+                                        ],
+                                        "type": "collection",
+                                        "label": "Image URLs"
+                                    },
+                                    {
+                                        "name": "folderId",
+                                        "type": "folder",
+                                        "label": "New Document's Location",
+                                        "required": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "metadata": {
+        "instant": false,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "us2.make.com",
+        "notes": []
+    }
+}
